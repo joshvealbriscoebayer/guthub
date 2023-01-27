@@ -1,0 +1,28 @@
+type User {
+  email: String!
+  followers: [String]!
+  following: [String]!
+  password: String!
+}
+
+type Query {
+  user(email: String!): UserOutput
+  users: [UserOutput]!
+}
+
+type Mutation {
+  upsertUser(input: UserInput!): User!
+}
+
+input UserInput {
+  email: String!
+  followers: [String]
+  following: [String]
+  password: String!
+}
+
+type UserOutput {
+  email: String!
+  followers: [String]
+  following: [String]
+}
