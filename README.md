@@ -8,7 +8,7 @@
 
    - This will build an image locally.
 
-3. `docker run -p 5432:5432 getting-started`
+3. `docker run -dp 5432:5432 [YOUR-TAG-NAME]`
 
    - This will run your image locally on port 5432. Add -d to run in detached mode.
 

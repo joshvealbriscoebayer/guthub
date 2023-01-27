@@ -6,9 +6,12 @@ package graph
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/TutorialEdge/realtime-chat-go-react/graph/model"
+	_ "github.com/lib/pq"
 )
 
 // UpsertUser is the resolver for the upsertUser field.
@@ -31,18 +34,42 @@ func (r *mutationResolver) UpsertUser(ctx context.Context, input model.UserInput
 
 // User is the resolver for the user field.
 func (r *queryResolver) User(ctx context.Context, email string) (*model.UserOutput, error) {
-	user, ok := r.Resolver.UserStore[email]
+	var followers []*string
+	var following []*string
+	var password string
+	var user model.UserOutput
 
-	if !ok {
-		return nil, fmt.Errorf("not found")
+	connStr := "postgresql://postgres:mysecretpassword@localhost/postgres?sslmode=disable"
+	// Connect to database
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	var userOutput model.UserOutput
-	userOutput.Email = email
-	userOutput.Followers = user.Followers
-	userOutput.Following = user.Following
+	rows, err := db.Query(fmt.Sprintf("SELECT password, followers, following FROM users WHERE email='%v'", email))
+	defer rows.Close()
+	db.Close()
+	
+	for rows.Next() {
+		rows.Scan(&followers, &following, &password)
+	
+		user.Email = email
+		user.Followers = followers
+		user.Following = following
+	}
+	
+	// user, ok := r.Resolver.UserStore[email]
 
-	return &userOutput, nil
+	// if !ok {
+	// 	return nil, fmt.Errorf("not found")
+	// }
+
+	// var userOutput model.UserOutput
+	// userOutput.Email = email
+	// userOutput.Followers = user.Followers
+	// userOutput.Following = user.Following
+
+	return &user, nil
 }
 
 // Users is the resolver for the users field.
