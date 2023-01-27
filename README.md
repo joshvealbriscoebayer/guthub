@@ -1,4 +1,6 @@
-# To run database locally
+# Guthub
+
+## To run database locally
 
 1. Install [docker](https://docs.docker.com/get-docker/)
 
