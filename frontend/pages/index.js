@@ -1,9 +1,15 @@
 import Head from "next/head";
+import Link from "next/link";
+import AppBar from "@mui/material/AppBar";
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Typography from '@mui/material/Typography';
 import styles from "../styles/Home.module.css";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import SearchField from "../components/SearchField";
 
 export default function Home() {
+  const [searchValue, setSearchValue] = useState('')
   const callServer = async () => {
     try {
       const response = (await axios.get("http://localhost:8080")).data;
@@ -16,7 +22,7 @@ export default function Home() {
   useEffect(() => {
     callServer();
   }, []);
-
+  console.log(searchValue)
   return (
     <div className={styles.container}>
       <Head>
@@ -25,6 +31,15 @@ export default function Home() {
       </Head>
 
       <main>
+        <AppBar className={styles.appBarContent}>
+          <SearchField value={searchValue} onChange={setSearchValue} />
+          <Link href="/signUp" className={styles.signUpLink}>
+            <div className={styles.signUpContent}>
+              <Typography className={styles.signUpText}>Sign Up</Typography>
+              <AccountCircle />
+            </div>
+          </Link>
+        </AppBar>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
