@@ -8,10 +8,22 @@
 
    - This will build an image locally.
 
-3. `docker run -p 5432:5432 getting-started`
+3. `docker run -dp 5432:5432 [YOUR-TAG-NAME]`
 
    - This will run your image locally on port 5432. Add -d to run in detached mode.
 
 4. Open docker desktop to view your containers and images. If the run command fails try deleting your existing infra first.
 
 5. Install [pgAdmin 4](https://www.pgadmin.org/download/) to run SQL queries.
+
+## Go
+
+### To Run Server
+
+1. `cd backend/`
+
+2. `go run server.go`
+
+### To Regenerate Graphql Files
+
+`go run github.com/99designs/gqlgen generate`
