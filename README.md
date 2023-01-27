@@ -9,3 +9,5 @@
    This will run your image locally on port 5432.
 
 4. Open docker desktop to view your containers and images. If the run command fails try deleting your existing infra first.
+
+5. Install [pgAdmin 4](https://www.pgadmin.org/download/) to run SQL queries.
