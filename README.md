@@ -26,4 +26,4 @@
 
 ### To Regenerate Graphql Files
 
-`go run server.go`
+`go run github.com/99designs/gqlgen generate`
