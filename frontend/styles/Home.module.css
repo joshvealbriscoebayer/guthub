@@ -89,3 +89,34 @@
     flex-direction: column;
   }
 }
+
+.signUpLink {
+  margin-left: auto;
+  right: 1rem;
+  padding: 1rem;
+  text-decoration: none;
+  position: absolute;
+}
+
+.signUpContent {
+  display: flex;
+  color: black;
+  align-items: center;
+}
+
+.signUpText {
+  text-decoration: none;
+  padding-right: 1rem;
+}
+
+.appBarContent {
+  height: 4rem;
+}
+
+.signInLink {
+  position: absolute;
+  right: 10rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: black;
+}
