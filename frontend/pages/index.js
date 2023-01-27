@@ -33,6 +33,9 @@ export default function Home() {
       <main>
         <AppBar className={styles.appBarContent}>
           <SearchField value={searchValue} onChange={setSearchValue} />
+          <Link href="/signIn" className={styles.signInLink}>
+            <Typography>Sign In</Typography>
+          </Link>
           <Link href="/signUp" className={styles.signUpLink}>
             <div className={styles.signUpContent}>
               <Typography className={styles.signUpText}>Sign Up</Typography>
