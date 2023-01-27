@@ -1,7 +1,22 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function Home() {
+  const callServer = async () => {
+    try {
+      const response = (await axios.get("http://localhost:8080")).data;
+      console.log({ response });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    callServer();
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -55,7 +70,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
         </a>
       </footer>
@@ -111,5 +126,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
